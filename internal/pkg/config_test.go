@@ -6,13 +6,13 @@ import (
 )
 
 func TestParseConfig(t *testing.T) {
-	configInvalidLocation := "../../configs/no.config.yaml"
-	configInvalidConfigFileLocation := "../../configs/bad.yaml"
-	configSampleLocation := "../../configs/sample.yaml"
-	configMultipleUserLocation := "../../configs/multiple.user.yaml"
+	configInvalidLocation := []string{"../../configs/no.config.yaml"}
+	configInvalidConfigFileLocation := []string{"../../configs/bad.yaml"}
+	configSampleLocation := []string{"../../configs/sample.yaml"}
+	configMultipleUserLocation := []string{"../../configs/multiple.user.yaml", "../../configs/multiple.user2.yaml"}
 	expectedSampleAuth := Authn{
 		[]User{
-			User{
+			{
 				"Grafana",
 				"Loki",
 				"tenant-1",
@@ -21,20 +21,30 @@ func TestParseConfig(t *testing.T) {
 	}
 	expectedMultipleUserAuth := Authn{
 		[]User{
-			User{
+			{
 				"User-a",
 				"pass-a",
 				"tenant-a",
 			},
-			User{
+			{
 				"User-b",
 				"pass-b",
 				"tenant-b",
 			},
+			{
+				"User-c",
+				"pass-c",
+				"tenant-c",
+			},
+			{
+				"User-d",
+				"pass-d",
+				"tenant-d",
+			},
 		},
 	}
 	type args struct {
-		location *string
+		location *[]string
 	}
 	tests := []struct {
 		name    string

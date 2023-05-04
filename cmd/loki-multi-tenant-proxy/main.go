@@ -36,10 +36,10 @@ func main() {
 					Name:  "loki-server",
 					Usage: "Loki server endpoint",
 					Value: "http://localhost:3500",
-				}, cli.StringFlag{
+				}, cli.StringSliceFlag{
 					Name:  "auth-config",
 					Usage: "AuthN yaml configuration file path",
-					Value: "authn.yaml",
+					Value: &cli.StringSlice{"authn.yaml"},
 				},
 			},
 		},

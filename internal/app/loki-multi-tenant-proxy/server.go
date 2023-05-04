@@ -15,7 +15,7 @@ import (
 func Serve(c *cli.Context) error {
 	lokiServerURL, _ := url.Parse(c.String("loki-server"))
 	serveAt := fmt.Sprintf(":%d", c.Int("port"))
-	authConfigLocation := c.String("auth-config")
+	authConfigLocation := c.StringSlice("auth-config")
 	authConfig, _ := pkg.ParseConfig(&authConfigLocation)
 
 	http.HandleFunc("/", createHandler(lokiServerURL, authConfig))

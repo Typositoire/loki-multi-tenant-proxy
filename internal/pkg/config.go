@@ -19,15 +19,23 @@ type User struct {
 }
 
 // ParseConfig read a configuration file in the path `location` and returns an Authn object
-func ParseConfig(location *string) (*Authn, error) {
-	data, err := ioutil.ReadFile(*location)
-	if err != nil {
-		return nil, err
-	}
+func ParseConfig(locations *[]string) (*Authn, error) {
 	authn := Authn{}
-	err = yaml.Unmarshal([]byte(data), &authn)
-	if err != nil {
-		return nil, err
+
+	for _, f := range *locations {
+		data, err := ioutil.ReadFile(f)
+		if err != nil {
+			return nil, err
+		}
+
+		_authn := Authn{}
+		err = yaml.Unmarshal([]byte(data), &_authn)
+		if err != nil {
+			return nil, err
+		}
+
+		authn.Users = append(authn.Users, _authn.Users...)
 	}
+
 	return &authn, nil
 }

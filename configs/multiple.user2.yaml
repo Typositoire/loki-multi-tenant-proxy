@@ -1,0 +1,7 @@
+users:
+  - username: User-c
+    password: pass-c
+    orgid: tenant-c
+  - username: User-d
+    password: pass-d
+    orgid: tenant-d
